@@ -19,6 +19,7 @@ namespace GpsPositionSimulator
         //{"quality": 1, "timestamp_us": 0, "timestamp": 1525421184, "altitude": 156.59999999999999, "precision": 0.73999999999999999, "longitude": 1424.4403500000001, "latitude": 5003.7251999999999, "satellites": 12, "speed": 0.109}
 
 
+
         static void Main(string[] args)
         {
 
@@ -35,8 +36,7 @@ namespace GpsPositionSimulator
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
-
-                
+                                
 
                 if (line.Contains("$GPGGA") || line.Contains("$GPRMC"))
                 {
@@ -69,6 +69,11 @@ namespace GpsPositionSimulator
 
         }
 
+        /// <summary>
+        /// Creates a project specific message for the consumer and returns it as a string.
+        /// </summary>
+        /// <param name="messages">List of two GPGGA and GPRMC messages.</param>
+        /// <returns></returns>
         private static string NmeaSenteceToJson(List<NmeaMessage> messages)
         {
             if (messages.Count != 2) return null;
